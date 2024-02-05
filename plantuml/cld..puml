@@ -1,0 +1,39 @@
+@startuml
+
+'top to bottom direction
+left to right direction
+skinparam linetype ortho
+
+class GymHall {
+  - head: Person
+  --
+  + GymHall():
+  --
+  - setHead(Person): void
+  + getHead(): Person
+  + isEmpty(): boolean
+  + addPersonOnFirstPosition(Person): void
+  + removePersonOnFirstPosition(): Person
+  + addPersonSortedBySize(Person): void
+  + reverseForeheadRow(): void
+}
+class Person {
+  - name: String
+  - sizeInCm: int
+  - next: Person
+  --
+  + Person():
+  + Person(String, int):
+  --
+  + getName(): String
+  + setName(String): void
+  + getSizeInCm(): int
+  + setSizeInCm(int): void
+  + getNext(): Person
+  + setNext(Person): void
+  + toString(): String
+}
+
+GymHall "1" ---> "0..1" Person
+Person "\n1" --> "0..1" Person
+@enduml
