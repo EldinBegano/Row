@@ -10,7 +10,8 @@ public class Person {
     }
 
     public Person(String name, int sizeInCm) {
-        throw new RuntimeException("Not yet implemented");
+        this.name = name;
+        this.sizeInCm = sizeInCm;
     }
 
     //region getter and setter

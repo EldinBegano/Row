@@ -1,3 +1,4 @@
+package at.htlleonding.stirnreihe;
 
 public class GymHall {
 
@@ -17,27 +18,76 @@ public class GymHall {
     }
 
     public boolean isEmpty() {
-        throw new RuntimeException("Not yet implemented");
+        if (head == null){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public at.htlleonding.stirnreihe.Person removePersonOnFirstPosition() {
-        throw new RuntimeException("Not yet implemented");
+        at.htlleonding.stirnreihe.Person personToRemove = head;
+        if (personToRemove == null){
+            throw new RuntimeException("GymHall is empty");
+        } else if (head.getNext() == null){
+            head = null;
+        }else {
+            head = head.getNext();
+        }
+        return personToRemove;
     }
 
     public void addPersonOnFirstPosition(at.htlleonding.stirnreihe.Person newPerson) {
-        throw new RuntimeException("Not yet implemented");
+        if (head == null){
+            head = newPerson;
+        } else {
+            at.htlleonding.stirnreihe.Person placeholder = head;
+            head = newPerson;
+            head.setNext(placeholder);
+
+        }
+
+
     }
 
     // die Reihenfolge der Stirnreihe umdrehen
     public void reverseForeheadRow() {
-        throw new RuntimeException("Not yet implemented");
+
+        at.htlleonding.stirnreihe.Person prevPerson = null;
+        at.htlleonding.stirnreihe.Person currentPerson = head;
+
+        while (currentPerson != null) {
+            at.htlleonding.stirnreihe.Person nextPerson = currentPerson.getNext();
+            currentPerson.setNext(prevPerson);
+            prevPerson = currentPerson;
+            currentPerson = nextPerson;
+        }
     }
 
 
     // anhand der Größe sortieren, dh die kleinste Person ist am Anfang (head)
     public void addPersonSortedBySize(at.htlleonding.stirnreihe.Person newPerson) {
-        throw new RuntimeException("Not yet implemented");
-        // Wenn die Liste leer ist
+        if (head == null){
+            setHead(newPerson);
+        } else if (newPerson.getSizeInCm() < head.getSizeInCm()){
+            newPerson.setNext(head);
+            head = newPerson;
+        } else {
+            at.htlleonding.stirnreihe.Person currentPerson = head;
+            boolean valid = true;
+            while (currentPerson.getNext() != null && valid == true){
+                if (newPerson.getSizeInCm() < currentPerson.getNext().getSizeInCm()) {
+                    newPerson.setNext(currentPerson.getNext());
+                    currentPerson.setNext(newPerson);
+                    valid = false;
+                } else {
+                    currentPerson = currentPerson.getNext();
+                }
+            }
+            if (valid == true){
+                currentPerson.setNext(newPerson);
+            }
+        }
 
         // Wenn die Liste nur ein Element hat
 
